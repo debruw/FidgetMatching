@@ -1714,7 +1714,7 @@ MonoBehaviour:
   volumeConstraintsData:
     batches: []
   groups: []
-  inputMesh: {fileID: 4300000, guid: 37d82da0e646e40f1966f6668cc64891, type: 3}
+  inputMesh: {fileID: 4300000, guid: 2aa4d1401124f4f56bec911ef61b4766, type: 3}
   scale: {x: 1, y: 1, z: 1}
   particleRadius: 0.1
   particleOverlap: 0.2

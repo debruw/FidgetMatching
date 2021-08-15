@@ -121,7 +121,7 @@ Material:
     - _OtherSettings: 0
     - _Parallax: 0.02
     - _RampSmooth: 0.5
-    - _RampThreshold: 0.6
+    - _RampThreshold: 0.5
     - _RealtimeShadow: 0
     - _RimEnable: 0
     - _RimPower: 1
@@ -141,7 +141,7 @@ Material:
     - _Shading_T: 0
     - _ShadowBlend: 0
     - _ShadowInfluence: 0
-    - _Shininess: 0.1
+    - _Shininess: 0.2
     - _ShowAO: 0
     - _ShowAmbientSettings: 0
     - _ShowBack: 0
@@ -196,7 +196,7 @@ Material:
     - _GradientYStartPos_G: {r: 0, g: 0, b: 0, a: 0}
     - _GradientYStartPos_L: {r: 0, g: 0, b: 0, a: 0}
     - _GradientYStartPos_R: {r: 0, g: 0, b: 0, a: 0}
-    - _HColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    - _HColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
     - _LMColor: {r: 0, g: 0, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}

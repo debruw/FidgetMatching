@@ -73,14 +73,10 @@ public class AnimationTrigger : MonoBehaviour
             {
                 foreach (var item in ItemManager.Instance.playerItemsOnTable)
                 {
-                    item.GetComponent<Rigidbody>().useGravity = false;
-                    item.GetComponent<Rigidbody>().isKinematic = true;
                     item.transform.parent = GameManager.Instance.PlayerHandsAnimator.transform.GetChild(0).transform;
                 }
                 foreach (var item in ItemManager.Instance.AIItemsOnTheTable)
                 {
-                    item.GetComponent<Rigidbody>().useGravity = false;
-                    item.GetComponent<Rigidbody>().isKinematic = true;
                     item.transform.parent = GameManager.Instance.AIHandsAnimator.transform.GetChild(0).transform;
                 }
             }
@@ -88,14 +84,10 @@ public class AnimationTrigger : MonoBehaviour
             {
                 foreach (var item in ItemManager.Instance.playerItemsOnTable)
                 {
-                    item.GetComponent<Rigidbody>().useGravity = false;
-                    item.GetComponent<Rigidbody>().isKinematic = true;
                     item.transform.parent = GameManager.Instance.AIHandsAnimator.transform.GetChild(0).transform;
                 }
                 foreach (var item in ItemManager.Instance.AIItemsOnTheTable)
                 {
-                    item.GetComponent<Rigidbody>().useGravity = false;
-                    item.GetComponent<Rigidbody>().isKinematic = true;
                     item.transform.parent = GameManager.Instance.PlayerHandsAnimator.transform.GetChild(0).transform;
                 }
             }

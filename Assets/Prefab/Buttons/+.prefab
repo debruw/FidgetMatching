@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actor: {fileID: -7858321907267071157}
   m_Target: {fileID: 7900954438281893277}
-  m_ParticleGroup: {fileID: -2556964671624567503, guid: d1bbdee4de49a1e479615ccf2b87ba8e,
+  m_ParticleGroup: {fileID: 3537908633795309191, guid: d1bbdee4de49a1e479615ccf2b87ba8e,
     type: 2}
   m_AttachmentType: 0
   m_ConstrainOrientation: 0
@@ -171,7 +171,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7900954438281893270}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1

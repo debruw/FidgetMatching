@@ -13,10 +13,8 @@ GameObject:
   - component: {fileID: 4150198057412231381}
   - component: {fileID: 3682630973893287975}
   - component: {fileID: 7022681605535198008}
-  - component: {fileID: 1625438977507718239}
   - component: {fileID: 360877055756835789}
   - component: {fileID: 7061897441520082152}
-  - component: {fileID: 1852904965017158532}
   m_Layer: 0
   m_Name: Money
   m_TagString: Untagged
@@ -124,22 +122,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.91616267, y: 0.37834245, z: 0.20078364}
   m_Center: {x: -0.003539599, y: -0.002589925, z: 0.0016058293}
---- !u!54 &1625438977507718239
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2207725272518201770}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &360877055756835789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,16 +164,3 @@ MonoBehaviour:
   m_BoneWeights: []
   m_Bound: 0
   m_Source: {fileID: 360877055756835789}
---- !u!114 &1852904965017158532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2207725272518201770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kinematicForParticles: 0

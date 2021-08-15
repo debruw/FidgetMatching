@@ -30,7 +30,7 @@ public class ItemManager : MonoBehaviour
     }
 
     public State playerState;
-    public Transform playerThrowPoint, AIThrowPoint, table;
+    public Transform playerThrowPoint, AIThrowPoint, tableToTurn, tableToParent;
     public AIController aiController;
 
     public Transform playerContent, aiContent;
@@ -61,8 +61,8 @@ public class ItemManager : MonoBehaviour
     public void ThrowCurrentObject(GameObject itemPrefab)
     {
         playerState = State.None;
-        GameObject item = Instantiate(itemPrefab, playerThrowPoint.position, Quaternion.identity, table);
-        item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, 10), ForceMode.VelocityChange);
+        GameObject item = Instantiate(itemPrefab, playerThrowPoint.position, itemPrefab.transform.rotation, tableToTurn);
+        item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, 7), ForceMode.VelocityChange);
         playerItemsOnTable.Add(item.GetComponent<Item>());
         StartCoroutine(WaitAndMakeMove());
     }
@@ -79,8 +79,8 @@ public class ItemManager : MonoBehaviour
         {
             aiController.currentAIState = State.None;
             int random = Random.Range(0, AICanvasItems.Count);
-            GameObject item = Instantiate(AICanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, Quaternion.identity, table);
-            item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -10), ForceMode.VelocityChange);
+            GameObject item = Instantiate(AICanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+            item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
             AIItemsOnTheTable.Add(item.GetComponent<Item>());
             GameObject go = AICanvasItems[random].gameObject;
             AICanvasItems.Remove(AICanvasItems[random]);
@@ -90,8 +90,8 @@ public class ItemManager : MonoBehaviour
         {
             aiController.currentAIState = State.None;
             int random = Random.Range(0, itemList.Count);
-            GameObject item = Instantiate(itemList[random].ItemPrefab, AIThrowPoint.position, Quaternion.identity, table);
-            item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -10), ForceMode.VelocityChange);
+            GameObject item = Instantiate(itemList[random].ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+            item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
             AIItemsOnTheTable.Add(item.GetComponent<Item>());
         }
     }
@@ -99,8 +99,16 @@ public class ItemManager : MonoBehaviour
 
     public IEnumerator TurnTable()
     {
+        foreach (var item in AIItemsOnTheTable)
+        {
+            item.GetComponent<ObiSoftbody>().enabled = false;
+        }
+        foreach (var item in playerItemsOnTable)
+        {
+            item.GetComponent<ObiSoftbody>().enabled = false;
+        }
         yield return new WaitForSeconds(.5f);
-        table.transform.DORotate(new Vector3(0, table.transform.eulerAngles.y + 180, 0), 1).OnComplete(() =>
+        tableToTurn.transform.DORotate(new Vector3(0, tableToTurn.transform.eulerAngles.y + 180, 0), 1).OnComplete(() =>
           {
               aiController.currentAIState = State.None;
               playerState = State.None;
