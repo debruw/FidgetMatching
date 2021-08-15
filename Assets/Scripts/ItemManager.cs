@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Obi;
 
 public class ItemManager : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class ItemManager : MonoBehaviour
     {
         playerState = State.None;
         GameObject item = Instantiate(itemPrefab, playerThrowPoint.position, Quaternion.identity, table);
-        item.GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-3f, 3f), 0, 10);
+        item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, 10), ForceMode.VelocityChange);
         playerItemsOnTable.Add(item.GetComponent<Item>());
         StartCoroutine(WaitAndMakeMove());
     }
@@ -79,7 +80,7 @@ public class ItemManager : MonoBehaviour
             aiController.currentAIState = State.None;
             int random = Random.Range(0, AICanvasItems.Count);
             GameObject item = Instantiate(AICanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, Quaternion.identity, table);
-            item.GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-3f, 3f), 0, -5);
+            item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -10), ForceMode.VelocityChange);
             AIItemsOnTheTable.Add(item.GetComponent<Item>());
             GameObject go = AICanvasItems[random].gameObject;
             AICanvasItems.Remove(AICanvasItems[random]);
@@ -90,7 +91,7 @@ public class ItemManager : MonoBehaviour
             aiController.currentAIState = State.None;
             int random = Random.Range(0, itemList.Count);
             GameObject item = Instantiate(itemList[random].ItemPrefab, AIThrowPoint.position, Quaternion.identity, table);
-            item.GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-3f, 3f), 0, -5);
+            item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -10), ForceMode.VelocityChange);
             AIItemsOnTheTable.Add(item.GetComponent<Item>());
         }
     }

@@ -10,10 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4475800721579550452}
   - component: {fileID: 698874465339091281}
-  - component: {fileID: 3338875786495024539}
+  - component: {fileID: -1490682152253619332}
   - component: {fileID: 1925769210926326727}
   - component: {fileID: 6528204037356148208}
   - component: {fileID: 9809832534857855}
+  - component: {fileID: -7809868609568761543}
+  - component: {fileID: -5373286704954416855}
+  - component: {fileID: 3056242825051652801}
   m_Layer: 0
   m_Name: Gold
   m_TagString: Untagged
@@ -28,8 +31,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3843520630395763790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.7, y: 1.4, z: 1.7}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,8 +46,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3843520630395763790}
   m_Mesh: {fileID: -5495902117074765545, guid: 8f54af46628b6dd48998491a49807479, type: 3}
---- !u!23 &3338875786495024539
-MeshRenderer:
+--- !u!137 &-1490682152253619332
+SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -57,7 +60,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +85,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: -5495902117074765545, guid: 8f54af46628b6dd48998491a49807479, type: 3}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0.007123729}
+    m_Extent: {x: 0.099999994, y: 0.32999998, z: 0.06455554}
+  m_DirtyAABB: 0
 --- !u!114 &1925769210926326727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,8 +121,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.19999999, y: 0.65999997, z: 0.13294508}
-  m_Center: {x: 0, y: 0, z: 0.009040723}
+  m_Size: {x: 0.26228088, y: 0.8220579, z: 0.1729828}
+  m_Center: {x: 0.0014829021, y: 0.0036011424, z: 0.0068163914}
 --- !u!54 &9809832534857855
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,3 +139,58 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7809868609568761543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843520630395763790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f34e5650326d42f48ed54336d58073d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollisionMaterial: {fileID: 0}
+  m_SoftbodyBlueprint: {fileID: 11400000, guid: 73ca6848697e3cc4e99a4e8f8a3305ac,
+    type: 2}
+  m_SelfCollisions: 0
+  centerBatch: -1
+  centerShape: -1
+  _shapeMatchingConstraintsEnabled: 1
+  _deformationResistance: 1
+  _maxDeformation: 0
+  _plasticYield: 0
+  _plasticCreep: 0
+  _plasticRecovery: 0
+--- !u!114 &-5373286704954416855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843520630395763790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83bf94c6a4abf4495a5a12f7f2f234ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SkinningFalloff: 1
+  m_SkinningMaxDistance: 0.5
+  m_Bindposes: []
+  m_BoneWeights: []
+  m_Bound: 0
+  m_Source: {fileID: -7809868609568761543}
+--- !u!114 &3056242825051652801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843520630395763790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 0
