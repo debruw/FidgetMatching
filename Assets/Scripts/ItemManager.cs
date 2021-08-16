@@ -101,12 +101,14 @@ public class ItemManager : MonoBehaviour
             item.GetComponent<ObiSoftbody>().enabled = false;
         }
         yield return new WaitForSeconds(.5f);
+        GameManager.Instance.isTableTurning = true;
         tableToTurn.transform.DORotate(new Vector3(0, tableToTurn.transform.eulerAngles.y + 180, 0), 1).OnComplete(() =>
           {
               aiController.currentAIState = State.None;
               playerState = State.None;
               GameManager.Instance.AIHandsAnimator.SetTrigger("TakeAll");
               GameManager.Instance.PlayerHandsAnimator.SetTrigger("TakeAll");
+              GameManager.Instance.isTableTurning = false;
           }
         );
     }

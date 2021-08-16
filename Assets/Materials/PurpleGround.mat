@@ -121,7 +121,7 @@ Material:
     - _OcclusionStrength: 1
     - _OtherSettings: 0
     - _Parallax: 0.02
-    - _RampSmooth: 0.5
+    - _RampSmooth: 1
     - _RampThreshold: 0.5
     - _RealtimeShadow: 0
     - _RimEnable: 0

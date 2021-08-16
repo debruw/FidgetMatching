@@ -5,6 +5,9 @@ using UnityEngine;
 public class AnimationTrigger : MonoBehaviour
 {
     public bool isMainScript;
+    int matchCount;
+    int DenyCount;
+
     public void OnDenyEnd()
     {
         if (isMainScript)
@@ -17,9 +20,29 @@ public class AnimationTrigger : MonoBehaviour
             }
             else
             {
-                //ai ı deny ettir
-                StartCoroutine(ItemManager.Instance.aiController.WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
-                ItemManager.Instance.aiController.currentAIState = ItemManager.State.Deny;
+                foreach (var aiCanvasItem in ItemManager.Instance.AICanvasItems)
+                {
+                    foreach (var playerItemOnTable in ItemManager.Instance.playerItemsOnTable)
+                    {
+                        if (aiCanvasItem.myItem == playerItemOnTable.me)
+                        {
+                            matchCount++;
+                        }
+                    }
+                }
+                if (matchCount > 0 && DenyCount == 0)
+                {
+                    StartCoroutine(ItemManager.Instance.aiController.WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
+                    ItemManager.Instance.aiController.currentAIState = ItemManager.State.Trade;
+                    DenyCount++;
+                }
+                else
+                {
+                    //ai ı deny ettir
+                    StartCoroutine(ItemManager.Instance.aiController.WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
+                    ItemManager.Instance.aiController.currentAIState = ItemManager.State.Deny;
+                    DenyCount = 0;
+                }
             }
         }
         else
@@ -30,10 +53,6 @@ public class AnimationTrigger : MonoBehaviour
                 GameManager.Instance.AIHandsAnimator.SetTrigger("TakeAll");
                 GameManager.Instance.PlayerHandsAnimator.SetTrigger("TakeAll");
             }
-            else
-            {
-
-            }
         }
     }
 
@@ -41,7 +60,7 @@ public class AnimationTrigger : MonoBehaviour
     {
         if (isMainScript)
         {
-            //tell ai give more
+            //ai a daha fazla vermesini söyle
             if (ItemManager.Instance.AIItemsOnTheTable.Count < 2)
             {
                 ItemManager.Instance.ThrowRandomAIObject();
@@ -51,10 +70,6 @@ public class AnimationTrigger : MonoBehaviour
                 StartCoroutine(ItemManager.Instance.aiController.WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
                 ItemManager.Instance.aiController.currentAIState = ItemManager.State.Deny;
             }
-        }
-        else
-        {
-
         }
     }
 
@@ -79,10 +94,6 @@ public class AnimationTrigger : MonoBehaviour
                 //ikiside kabul etti
                 StartCoroutine(ItemManager.Instance.WaitAndTurnTable());
             }
-            else
-            {
-
-            }
         }
     }
 
@@ -93,7 +104,7 @@ public class AnimationTrigger : MonoBehaviour
         {
             if (ItemManager.Instance.playerState == ItemManager.State.Deny)
             {
-                 ItemManager.Instance.TakeItemsBackForAI();
+                ItemManager.Instance.TakeItemsBackForAI();
                 ItemManager.Instance.TakeItemsBackForPlayer();
             }
             else
@@ -101,10 +112,6 @@ public class AnimationTrigger : MonoBehaviour
                 ItemManager.Instance.MatchItemsForAI();
                 ItemManager.Instance.MatchItemsForPlayer();
             }
-        }
-        else
-        {
-
         }
     }
 
@@ -134,10 +141,6 @@ public class AnimationTrigger : MonoBehaviour
                     item.transform.parent = GameManager.Instance.PlayerHandsAnimator.transform.GetChild(0).transform;
                 }
             }
-        }
-        else
-        {
-
         }
     }
 }

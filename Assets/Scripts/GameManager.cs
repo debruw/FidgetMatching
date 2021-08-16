@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public int currentLevel = 1;
     int MaxLevelNumber = 1;
-    public bool isGameStarted, isGameOver;
+    public bool isGameStarted, isGameOver, isTableTurning;
 
     #region UI Elements
     public GameObject WinPanel, LosePanel, InGamePanel;

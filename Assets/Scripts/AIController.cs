@@ -9,6 +9,10 @@ public class AIController : MonoBehaviour
     int matchCount = 0;
     public IEnumerator WaitAndMakeMoveAfterPlayer()
     {
+        if (GameManager.Instance.isTableTurning || GameManager.Instance.isGameOver || !GameManager.Instance.isGameStarted)
+        {
+            yield break;
+        }
         yield return new WaitForSeconds(.5f);
         foreach (var aiCanvasItem in ItemManager.Instance.AICanvasItems)
         {
@@ -22,7 +26,7 @@ public class AIController : MonoBehaviour
                 }
             }
         }
-        if (ItemManager.Instance.playerItemsOnTable.Count == 1 && ItemManager.Instance.AIItemsOnTheTable.Count == 0)
+        if (ItemManager.Instance.playerItemsOnTable.Count == 1 && ItemManager.Instance.AIItemsOnTheTable.Count == 0 && matchCount == 1)
         {
             //Direkt kabule basabiliriz
             StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
@@ -51,6 +55,12 @@ public class AIController : MonoBehaviour
             currentAIState = ItemManager.State.WantMore;
         }
         else if (ItemManager.Instance.playerItemsOnTable.Count > 1 && matchCount == 0)
+        {
+            //reddet
+            StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
+            currentAIState = ItemManager.State.Deny;
+        }
+        else if (ItemManager.Instance.playerItemsOnTable.Count > 1 && ItemManager.Instance.playerCanvasItems.Count == 1)
         {
             //reddet
             StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));

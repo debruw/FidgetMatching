@@ -15,6 +15,10 @@ public class GameButton : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (GameManager.Instance.isTableTurning || GameManager.Instance.isGameOver || !GameManager.Instance.isGameStarted)
+        {
+            return;
+        }
         switch (buttonType)
         {
             case ButtonType.DENY:
