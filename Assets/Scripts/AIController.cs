@@ -6,71 +6,73 @@ public class AIController : MonoBehaviour
 {
     public ItemManager.State currentAIState;
 
-    public void DecideNextMove()
+    int matchCount = 0;
+    public IEnumerator WaitAndMakeMoveAfterPlayer()
     {
-        if (GameManager.Instance.isGameOver)
+        yield return new WaitForSeconds(.5f);
+        foreach (var aiCanvasItem in ItemManager.Instance.AICanvasItems)
         {
-            return;
+            foreach (var playerItemOnTable in ItemManager.Instance.playerItemsOnTable)
+            {
+                if (aiCanvasItem.myItem == playerItemOnTable.me)
+                {
+                    //we have a match
+                    //we can press trade
+                    matchCount++;
+                }
+            }
         }
-        if (ItemManager.Instance.AIItemsOnTheTable.Count == 0)
+        if (ItemManager.Instance.playerItemsOnTable.Count == 1 && ItemManager.Instance.AIItemsOnTheTable.Count == 0)
         {
-            StartCoroutine(WaitAndThrowRandomAIObject());
+            //Direkt kabule basabiliriz
+            StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
+            currentAIState = ItemManager.State.Trade;
+        }
+        else if (ItemManager.Instance.playerItemsOnTable.Count == 1 && ItemManager.Instance.AIItemsOnTheTable.Count == 1 && matchCount == 0)
+        {
+            //50 fazlasını iste - 50 kabul
+            if (Random.Range(0, 10) > 4)
+            {
+                //50 kabul
+                StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
+                currentAIState = ItemManager.State.Trade;
+            }
+            else
+            {
+                //50 fazlasını iste
+                StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "WANTMORE"));
+                currentAIState = ItemManager.State.WantMore;
+            }
+        }
+        else if (ItemManager.Instance.playerItemsOnTable.Count == 0 && ItemManager.Instance.AIItemsOnTheTable.Count == 1)
+        {
+            // fazlasını ister
+            StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "WANTMORE"));
+            currentAIState = ItemManager.State.WantMore;
+        }
+        else if (ItemManager.Instance.playerItemsOnTable.Count > 1 && matchCount == 0)
+        {
+            //reddet
+            StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
+            currentAIState = ItemManager.State.Deny;
         }
         else
         {
-            switch (ItemManager.Instance.playerState)
+            if (matchCount > 0)
             {
-                case ItemManager.State.None:
-                    MakeRandomMove();
-                    break;
-                case ItemManager.State.Trade:
-                    if (Random.Range(0, 2) == 0)
-                    {
-                        currentAIState = ItemManager.State.Trade;
-                        StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
-                    }
-                    else
-                    {
-                        currentAIState = ItemManager.State.WantMore;
-                        StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "WANTMORE"));
-                    }
-                    break;
-                case ItemManager.State.WantMore:
-                    StartCoroutine(WaitAndThrowRandomAIObject());
-                    break;
-                case ItemManager.State.Deny:
-                    currentAIState = ItemManager.State.Deny;
-                    StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
-                    break;
-                default:
-                    break;
+                //Kabul edebilir
+                StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
+                currentAIState = ItemManager.State.Trade;
+            }
+            else
+            {
+                //daha fazlasını iste
+                StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "WANTMORE"));
+                currentAIState = ItemManager.State.WantMore;
             }
         }
-    }
 
-    public void MakeRandomMove()
-    {
-        int rand = Random.Range(0, 4);
-        switch (rand)
-        {
-            case 0:
-                StartCoroutine(WaitAndThrowRandomAIObject());
-                break;
-            case 1:
-                currentAIState = ItemManager.State.Deny;
-                StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
-                break;
-            case 2:
-                currentAIState = ItemManager.State.Trade;
-                StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
-                break;
-            case 3:
-                currentAIState = ItemManager.State.WantMore;
-                StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "WANTMORE"));
-                break;
-            default:
-                break;
-        }
+        matchCount = 0;
     }
 
     public IEnumerator WaitAndThrowRandomAIObject()

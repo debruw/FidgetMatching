@@ -64,13 +64,7 @@ public class ItemManager : MonoBehaviour
         GameObject item = Instantiate(itemPrefab, playerThrowPoint.position, itemPrefab.transform.rotation, tableToTurn);
         item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, 7), ForceMode.VelocityChange);
         playerItemsOnTable.Add(item.GetComponent<Item>());
-        StartCoroutine(WaitAndMakeMove());
-    }
-
-    IEnumerator WaitAndMakeMove()
-    {
-        yield return new WaitForSeconds(.5f);
-        aiController.DecideNextMove();
+        StartCoroutine(aiController.WaitAndMakeMoveAfterPlayer());
     }
 
     public void ThrowRandomAIObject()
@@ -96,8 +90,7 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-
-    public IEnumerator TurnTable()
+    public IEnumerator WaitAndTurnTable()
     {
         foreach (var item in AIItemsOnTheTable)
         {

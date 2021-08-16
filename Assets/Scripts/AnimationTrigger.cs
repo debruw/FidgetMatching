@@ -7,69 +7,112 @@ public class AnimationTrigger : MonoBehaviour
     public bool isMainScript;
     public void OnDenyEnd()
     {
-        if (ItemManager.Instance.playerState == ItemManager.State.Deny && ItemManager.Instance.aiController.currentAIState == ItemManager.State.Deny)
+        if (isMainScript)
         {
-            GameManager.Instance.AIHandsAnimator.SetTrigger("TakeAll");
-            GameManager.Instance.PlayerHandsAnimator.SetTrigger("TakeAll");
+            if (ItemManager.Instance.aiController.currentAIState == ItemManager.State.Deny)
+            {
+                //ikiside deny etti                
+                GameManager.Instance.AIHandsAnimator.SetTrigger("TakeAll");
+                GameManager.Instance.PlayerHandsAnimator.SetTrigger("TakeAll");
+            }
+            else
+            {
+                //ai ı deny ettir
+                StartCoroutine(ItemManager.Instance.aiController.WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
+                ItemManager.Instance.aiController.currentAIState = ItemManager.State.Deny;
+            }
+        }
+        else
+        {
+            if (ItemManager.Instance.playerState == ItemManager.State.Deny)
+            {
+                //ikiside deny etti
+                GameManager.Instance.AIHandsAnimator.SetTrigger("TakeAll");
+                GameManager.Instance.PlayerHandsAnimator.SetTrigger("TakeAll");
+            }
+            else
+            {
+
+            }
         }
     }
 
     public void OnWantMoreEnd()
     {
+        if (isMainScript)
+        {
+            //tell ai give more
+            if (ItemManager.Instance.AIItemsOnTheTable.Count < 2)
+            {
+                ItemManager.Instance.ThrowRandomAIObject();
+            }
+            else
+            {
+                StartCoroutine(ItemManager.Instance.aiController.WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
+                ItemManager.Instance.aiController.currentAIState = ItemManager.State.Deny;
+            }
+        }
+        else
+        {
 
+        }
     }
 
     public void OnTradeEnd()
     {
-        if (ItemManager.Instance.aiController.currentAIState == ItemManager.State.Trade && ItemManager.Instance.playerState == ItemManager.State.Trade)
+        if (isMainScript)
         {
-            ItemManager.Instance.aiController.currentAIState = ItemManager.State.None;
-            ItemManager.Instance.playerState = ItemManager.State.None;
-            StartCoroutine(ItemManager.Instance.TurnTable());
-            isTakeAllWorked = false;
-        }
-    }
-
-    bool isTakeAllWorked = false;
-    public void OnTakeAllEnd()
-    {
-        if (ItemManager.Instance.playerState == ItemManager.State.Deny && ItemManager.Instance.aiController.currentAIState == ItemManager.State.Deny)
-        {
-            ItemManager.Instance.TakeItemsBackForAI();
-            ItemManager.Instance.TakeItemsBackForPlayer();
-            ItemManager.Instance.playerState = ItemManager.State.None;
-            ItemManager.Instance.aiController.currentAIState = ItemManager.State.None;
+            if (ItemManager.Instance.aiController.currentAIState == ItemManager.State.Trade)
+            {
+                //ikiside kabul etti
+                StartCoroutine(ItemManager.Instance.WaitAndTurnTable());
+            }
+            else
+            {
+                StartCoroutine(ItemManager.Instance.aiController.WaitAndMakeMoveAfterPlayer());
+            }
         }
         else
         {
-            if (!isTakeAllWorked)
+            if (ItemManager.Instance.playerState == ItemManager.State.Trade)
+            {
+                //ikiside kabul etti
+                StartCoroutine(ItemManager.Instance.WaitAndTurnTable());
+            }
+            else
+            {
+
+            }
+        }
+    }
+
+
+    public void OnTakeAllEnd()
+    {
+        if (isMainScript)
+        {
+            if (ItemManager.Instance.playerState == ItemManager.State.Deny)
+            {
+                 ItemManager.Instance.TakeItemsBackForAI();
+                ItemManager.Instance.TakeItemsBackForPlayer();
+            }
+            else
             {
                 ItemManager.Instance.MatchItemsForAI();
                 ItemManager.Instance.MatchItemsForPlayer();
-                isTakeAllWorked = true;
-                ItemManager.Instance.playerState = ItemManager.State.None;
-                ItemManager.Instance.aiController.currentAIState = ItemManager.State.None;
-                if (isMainScript)
-                {
-                    StartCoroutine(WaitAndNextMove());
-                }
             }
         }
+        else
+        {
 
-    }
-
-    IEnumerator WaitAndNextMove()
-    {
-        yield return new WaitForSeconds(.5f);
-        ItemManager.Instance.aiController.DecideNextMove();
-        isTakeAllWorked = true;
+        }
     }
 
     public void TakeAllHalf()
     {
         if (isMainScript)
         {
-            if (ItemManager.Instance.playerState == ItemManager.State.Deny && ItemManager.Instance.aiController.currentAIState == ItemManager.State.Deny)
+            if (ItemManager.Instance.playerState == ItemManager.State.Deny)
             {
                 foreach (var item in ItemManager.Instance.playerItemsOnTable)
                 {
@@ -91,6 +134,10 @@ public class AnimationTrigger : MonoBehaviour
                     item.transform.parent = GameManager.Instance.PlayerHandsAnimator.transform.GetChild(0).transform;
                 }
             }
+        }
+        else
+        {
+
         }
     }
 }
