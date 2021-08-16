@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Smiley
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: bf005068e20e3eb4dacaba09071efe16, type: 3}
-  itemPrefab: {fileID: 4488272012962293173, guid: 59685947a29f42c46b64e90cec4ed2f8,
+  itemPrefab: {fileID: 3604180197224357601, guid: 59685947a29f42c46b64e90cec4ed2f8,
     type: 3}

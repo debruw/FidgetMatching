@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PokeBall
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 03588eb7380ccf14aa1802d693ff10aa, type: 3}
-  itemPrefab: {fileID: 7694167542630132021, guid: 0c0f0679a8b9e8d4dab3e83e71bf5a9b,
+  itemPrefab: {fileID: 2425201282019332059, guid: 0c0f0679a8b9e8d4dab3e83e71bf5a9b,
     type: 3}
