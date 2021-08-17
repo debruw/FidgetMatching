@@ -23,8 +23,12 @@ public class CanvasItem : MonoBehaviour
 
     public void ButtonClick()
     {
-        ItemManager.Instance.ThrowCurrentObject(myItem.ItemPrefab);
-        ItemManager.Instance.playerCanvasItems.Remove(this);
-        Destroy(gameObject);
+        if (GameManager.Instance.isPlayersTurn)
+        {
+            ItemManager.Instance.ThrowCurrentObject(myItem.ItemPrefab);
+            ItemManager.Instance.playerCanvasItems.Remove(this);
+            Destroy(gameObject);
+            GameManager.Instance.isPlayersTurn = false;
+        }
     }
 }

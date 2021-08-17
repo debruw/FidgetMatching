@@ -88,6 +88,7 @@ public class ItemManager : MonoBehaviour
             item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
             AIItemsOnTheTable.Add(item.GetComponent<Item>());
         }
+        GameManager.Instance.isPlayersTurn = true;
     }
 
     public IEnumerator WaitAndTurnTable()

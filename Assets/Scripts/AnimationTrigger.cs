@@ -53,6 +53,7 @@ public class AnimationTrigger : MonoBehaviour
                 GameManager.Instance.AIHandsAnimator.SetTrigger("TakeAll");
                 GameManager.Instance.PlayerHandsAnimator.SetTrigger("TakeAll");
             }
+            GameManager.Instance.isPlayersTurn = true;
         }
     }
 
@@ -70,6 +71,10 @@ public class AnimationTrigger : MonoBehaviour
                 StartCoroutine(ItemManager.Instance.aiController.WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
                 ItemManager.Instance.aiController.currentAIState = ItemManager.State.Deny;
             }
+        }
+        else
+        {
+            GameManager.Instance.isPlayersTurn = true;
         }
     }
 
@@ -94,6 +99,7 @@ public class AnimationTrigger : MonoBehaviour
                 //ikiside kabul etti
                 StartCoroutine(ItemManager.Instance.WaitAndTurnTable());
             }
+            GameManager.Instance.isPlayersTurn = true;
         }
     }
 
@@ -112,6 +118,10 @@ public class AnimationTrigger : MonoBehaviour
                 ItemManager.Instance.MatchItemsForAI();
                 ItemManager.Instance.MatchItemsForPlayer();
             }
+        }
+        else
+        {
+            GameManager.Instance.isPlayersTurn = true;
         }
     }
 

@@ -81,7 +81,6 @@ public class AIController : MonoBehaviour
                 currentAIState = ItemManager.State.WantMore;
             }
         }
-
         matchCount = 0;
     }
 

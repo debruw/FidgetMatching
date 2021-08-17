@@ -19,23 +19,27 @@ public class GameButton : MonoBehaviour
         {
             return;
         }
-        switch (buttonType)
+        if (GameManager.Instance.isPlayersTurn)
         {
-            case ButtonType.DENY:
-                GameManager.Instance.ButtonPressed(true, buttonType);
-                ItemManager.Instance.playerState = ItemManager.State.Deny;
-                break;
-            case ButtonType.WANTMORE:
-                GameManager.Instance.ButtonPressed(true, buttonType);
-                ItemManager.Instance.playerState = ItemManager.State.WantMore;
-                break;
-            case ButtonType.TRADE:
-                GameManager.Instance.ButtonPressed(true, buttonType);
-                ItemManager.Instance.playerState = ItemManager.State.Trade;
-                break;
-            default:
+            switch (buttonType)
+            {
+                case ButtonType.DENY:
+                    GameManager.Instance.ButtonPressed(buttonType);
+                    ItemManager.Instance.playerState = ItemManager.State.Deny;
+                    break;
+                case ButtonType.WANTMORE:
+                    GameManager.Instance.ButtonPressed(buttonType);
+                    ItemManager.Instance.playerState = ItemManager.State.WantMore;
+                    break;
+                case ButtonType.TRADE:
+                    GameManager.Instance.ButtonPressed(buttonType);
+                    ItemManager.Instance.playerState = ItemManager.State.Trade;
+                    break;
+                default:
 
-                break;
+                    break;
+            }
+            GameManager.Instance.isPlayersTurn = false;
         }
     }
 }

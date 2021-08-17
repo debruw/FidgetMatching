@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public int currentLevel = 1;
     int MaxLevelNumber = 1;
-    public bool isGameStarted, isGameOver, isTableTurning;
+    public bool isGameStarted, isGameOver, isTableTurning, isPlayersTurn;
 
     #region UI Elements
     public GameObject WinPanel, LosePanel, InGamePanel;
@@ -54,16 +54,9 @@ public class GameManager : MonoBehaviour
     public GameObject PlayText, ContinueText;
     #endregion
 
-    public void ButtonPressed(bool whoPressed, GameButton.ButtonType type)
+    public void ButtonPressed(GameButton.ButtonType type)
     {
-        if (whoPressed)
-        {//Player Pressed
-            PlayerHandsAnimator.SetTrigger(type.ToString());
-        }
-        else
-        {//AIPressed
-            AIHandsAnimator.SetTrigger(type.ToString());
-        }
+        PlayerHandsAnimator.SetTrigger(type.ToString());
     }
 
     public IEnumerator WaitAndGameWin()
