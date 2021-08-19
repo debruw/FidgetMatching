@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public ItemManager itemManager;
 
     public Animator AIHandsAnimator, PlayerHandsAnimator;
-    public int AIPoints, PlayerPoints;
+    public MainCharacterScript maincharacter;
 
     public int currentLevel = 1;
     int MaxLevelNumber = 1;
@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Win");
         isGameOver = true;
+        maincharacter.bcgTRS.Speed = 0;
         //SoundManager.Instance.StopAllSounds();
         //SoundManager.Instance.playSound(SoundManager.GameSounds.Win);
 
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Lose");
         isGameOver = true;
+        maincharacter.bcgTRS.Speed = 0;
         //SoundManager.Instance.playSound(SoundManager.GameSounds.Lose);
 
         yield return new WaitForSeconds(1f);
@@ -120,6 +122,10 @@ public class GameManager : MonoBehaviour
     {
         isGameStarted = true;
         TapToStartButton.gameObject.SetActive(false);
-        StartCoroutine(ItemManager.Instance.aiController.WaitAndThrowRandomAIObject());
+
+        //StartCoroutine(ItemManager.Instance.aiController.WaitAndThrowRandomAIObject());
+
+        maincharacter.bcgTRS.Speed = 10;
+        maincharacter.PlayerAnimator.SetTrigger("Run");
     }
 }

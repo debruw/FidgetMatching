@@ -125,7 +125,6 @@ public class ItemManager : MonoBehaviour
                 if (AIItem.me == playerCanvasItem.myItem)
                 {
                     tempCanvasItem.Add(playerCanvasItem);
-                    GameManager.Instance.PlayerPoints += 10;
                     isMatched = true;
                 }
             }
@@ -162,7 +161,6 @@ public class ItemManager : MonoBehaviour
                 if (AICanvasItem.myItem == playerItem.me)
                 {
                     tempCanvasItem.Add(AICanvasItem);
-                    GameManager.Instance.AIPoints += 10;
                     isMatched = true;
                 }
             }
