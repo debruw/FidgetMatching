@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Water
   - Obstacle
+  - FinishLine
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get { return _instance; } }
 
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -122,8 +121,6 @@ public class GameManager : MonoBehaviour
     {
         isGameStarted = true;
         TapToStartButton.gameObject.SetActive(false);
-
-        //StartCoroutine(ItemManager.Instance.aiController.WaitAndThrowRandomAIObject());
 
         maincharacter.bcgTRS.Speed = 10;
         maincharacter.PlayerAnimator.SetTrigger("Run");

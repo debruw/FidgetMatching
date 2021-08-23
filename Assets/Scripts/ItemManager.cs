@@ -39,22 +39,17 @@ public class ItemManager : MonoBehaviour
     public List<ItemData> itemList;
     public List<CanvasItem> playerCanvasItems, AICanvasItems;
     public List<Item> playerItemsOnTable, AIItemsOnTheTable;
-    public List<ItemData> copyforItemData;
 
-    private void Start()
+    private void OnEnable()
     {
-        for (int i = 0; i < itemList.Count; i++)
-        {
-            copyforItemData.Add(itemList[i]);
-        }
-        for (int i = 0; i < playerCanvasItems.Count; i++)
-        {
-            int rand = Random.Range(0, copyforItemData.Count);
-            playerCanvasItems[i].myItem = copyforItemData[rand];
+        StartCoroutine(aiController.WaitAndThrowRandomAIObject());
+    }
 
-            copyforItemData.RemoveAt(rand);
-
-            playerCanvasItems[i].Initialize();
+    public void SetCanvasObjects(List<GameObject> collectedObjects)
+    {
+        for (int i = 0; i < collectedObjects.Count; i++)
+        {
+            CreateCanvasItem(playerContent, collectedObjects[i].GetComponent<Item>().me);
         }
     }
 
