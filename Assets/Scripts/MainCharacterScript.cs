@@ -11,7 +11,7 @@ public class MainCharacterScript : MonoBehaviour
 
     private Touch touch;
 
-    public CharacterController controller;
+    public GameObject childObject;
     public float xSpeed;
     public GameObject ChildObject;
     public Animator PlayerAnimator;
@@ -32,9 +32,8 @@ public class MainCharacterScript : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             translation = new Vector3(Input.GetAxis("Mouse X"), 0, 0) * Time.deltaTime * xSpeed;
-
-            controller.transform.Translate(translation, Space.World);
-            controller.transform.localPosition = new Vector3(Mathf.Clamp(controller.transform.localPosition.x, -3.5f, 3.5f), controller.transform.localPosition.y, controller.transform.localPosition.z);
+            childObject.transform.Translate(translation, Space.Self);
+            childObject.transform.localPosition = new Vector3(Mathf.Clamp(childObject.transform.localPosition.x, -3.5f, 3.5f), 0, 0);
         }
 #elif UNITY_IOS || UNITY_ANDROID
         if (Input.touchCount > 0)
@@ -42,7 +41,7 @@ public class MainCharacterScript : MonoBehaviour
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved)
             {
-                controller.transform.localPosition = new Vector3(Mathf.Clamp(controller.transform.localPosition.x + touch.deltaPosition.x * Time.deltaTime * (xSpeed / 20), -3.5f, 3.5f), controller.transform.localPosition.y, controller.transform.localPosition.z);
+                controller.transform.localPosition = new Vector3(Mathf.Clamp(controller.transform.localPosition.x + touch.deltaPosition.x * Time.deltaTime * (xSpeed / 20), -3.5f, 3.5f), 0, 0);
             }
             else if (touch.phase == TouchPhase.Began)
             {

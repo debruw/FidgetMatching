@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Platform
+  m_Name: PolygonStarter_Mat_Plane_02
   m_Shader: {fileID: 4800000, guid: ccfc7d68845db8341944b3091b59be55, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,8 +40,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: deabb51d6d57d864db669c4f4a5fb016, type: 3}
-        m_Scale: {x: 1, y: 0.5}
+        m_Texture: {fileID: 2800000, guid: d1437ffbc5420584299b44f559926a76, type: 3}
+        m_Scale: {x: 1, y: 3}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: abc83c21d57d4a74cabe12065fa1a8b2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8af77daad29f8b34da56515f193158f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -64,25 +64,33 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _DstBlendOutline: 10
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0.2
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset1: 25.71
+    - _Offset2: 0
+    - _Outline: 4.47
     - _Parallax: 0.02
-    - _RampSmooth: 1
-    - _RampThreshold: 0.5
-    - _Shininess: 0.01
+    - _RampSmooth: 0.5
+    - _RampThreshold: 0.7
+    - _Shininess: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecSmooth: 0.05
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SrcBlendOutline: 5
+    - _TexLod: 6.05
     - _UVSec: 0
+    - _ZSmooth: 0.69
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    - _OutlineColor: {r: 1, g: 0, b: 0, a: 1}
     - _SColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

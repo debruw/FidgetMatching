@@ -66,6 +66,11 @@ public class AIController : MonoBehaviour
             StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "DENY"));
             currentAIState = ItemManager.State.Deny;
         }
+        else if (ItemManager.Instance.playerItemsOnTable.Count == 1 && ItemManager.Instance.playerCanvasItems.Count == 0)
+        {
+            StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
+            currentAIState = ItemManager.State.Trade;
+        }
         else
         {
             if (matchCount > 0)
