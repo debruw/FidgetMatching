@@ -3639,6 +3639,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1463257198}
+    - target: {fileID: 2392728401358391853, guid: 1cf6fb652a171e9469439abb8891796c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5621082118558563165, guid: 1cf6fb652a171e9469439abb8891796c,
         type: 3}
       propertyPath: m_Controller
@@ -3646,6 +3651,18 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 975fd370c277f9c4588ac5af10e16a11, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cf6fb652a171e9469439abb8891796c, type: 3}
+--- !u!114 &1384116299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5686913070277435050, guid: 1cf6fb652a171e9469439abb8891796c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1384116298}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1393493774 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1019237725068564001, guid: 7822b29d4a0e57046ba54b254396e519,
@@ -3821,6 +3838,8 @@ MonoBehaviour:
   LevelText: {fileID: 754910059}
   PlayText: {fileID: 206065553}
   ContinueText: {fileID: 203503059}
+  Tutorial1: {fileID: 0}
+  Tutorial2: {fileID: 0}
 --- !u!4 &1463257199
 Transform:
   m_ObjectHideFlags: 0
@@ -6739,5 +6758,10 @@ PrefabInstance:
       propertyPath: willBeOpen.Array.data[3]
       value: 
       objectReference: {fileID: 1567140717}
+    - target: {fileID: 7075111855846089533, guid: 51265557ff51d02409e91b971fc60ad7,
+        type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 1384116299}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51265557ff51d02409e91b971fc60ad7, type: 3}

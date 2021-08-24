@@ -26,7 +26,13 @@ public class AIController : MonoBehaviour
                 }
             }
         }
-        if (ItemManager.Instance.playerItemsOnTable.Count == 1 && ItemManager.Instance.AIItemsOnTheTable.Count == 0 && matchCount == 1)
+        if (ItemManager.Instance.playerCanvasItems.Count == 1 && ItemManager.Instance.playerItemsOnTable.Count == 0 && ItemManager.Instance.playerState == ItemManager.State.Trade)
+        {
+            //Direkt kabule basabiliriz
+            StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));
+            currentAIState = ItemManager.State.Trade;
+        }
+        else if (ItemManager.Instance.playerItemsOnTable.Count == 1 && ItemManager.Instance.AIItemsOnTheTable.Count == 0 && matchCount == 1)
         {
             //Direkt kabule basabiliriz
             StartCoroutine(WaitAndTriggerAnimation(GameManager.Instance.AIHandsAnimator, "TRADE"));

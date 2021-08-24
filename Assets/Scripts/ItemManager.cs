@@ -65,24 +65,45 @@ public class ItemManager : MonoBehaviour
 
     public void ThrowRandomAIObject()
     {
-        if (AICanvasItems.Count > 0)
+        if (playerCanvasItems.Count == 1 && playerItemsOnTable.Count == 0 && playerState == State.WantMore)
         {
             aiController.currentAIState = State.None;
-            int random = Random.Range(0, AICanvasItems.Count);
-            GameObject item = Instantiate(AICanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+            GameObject item = Instantiate(playerCanvasItems[0].myItem.ItemPrefab, AIThrowPoint.position, itemList[0].ItemPrefab.transform.rotation, tableToTurn);
             item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
             AIItemsOnTheTable.Add(item.GetComponent<Item>());
-            GameObject go = AICanvasItems[random].gameObject;
-            AICanvasItems.Remove(AICanvasItems[random]);
-            Destroy(go);
         }
         else
         {
-            aiController.currentAIState = State.None;
-            int random = Random.Range(0, itemList.Count);
-            GameObject item = Instantiate(itemList[random].ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
-            item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
-            AIItemsOnTheTable.Add(item.GetComponent<Item>());
+            if (Random.Range(0, 100) < 75)
+            {
+                aiController.currentAIState = State.None;
+                int random = Random.Range(0, playerCanvasItems.Count);
+                GameObject item = Instantiate(playerCanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+                item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
+                AIItemsOnTheTable.Add(item.GetComponent<Item>());
+            }
+            else
+            {
+                if (AICanvasItems.Count > 0)
+                {
+                    aiController.currentAIState = State.None;
+                    int random = Random.Range(0, AICanvasItems.Count);
+                    GameObject item = Instantiate(AICanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+                    item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
+                    AIItemsOnTheTable.Add(item.GetComponent<Item>());
+                    GameObject go = AICanvasItems[random].gameObject;
+                    AICanvasItems.Remove(AICanvasItems[random]);
+                    Destroy(go);
+                }
+                else
+                {
+                    aiController.currentAIState = State.None;
+                    int random = Random.Range(0, itemList.Count);
+                    GameObject item = Instantiate(itemList[random].ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+                    item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
+                    AIItemsOnTheTable.Add(item.GetComponent<Item>());
+                }
+            }
         }
         GameManager.Instance.isPlayersTurn = true;
     }
@@ -121,7 +142,7 @@ public class ItemManager : MonoBehaviour
                 if (AIItem.me == playerCanvasItem.myItem)
                 {
                     tempCanvasItem.Add(playerCanvasItem);
-                    Instantiate(StarEffect, playerCanvasItem.ItemImage.transform.position, Quaternion.identity, playerContent);
+                    Destroy(Instantiate(StarEffect, playerCanvasItem.ItemImage.transform.position, Quaternion.identity, playerContent), 1f);
                     isMatched = true;
                 }
             }

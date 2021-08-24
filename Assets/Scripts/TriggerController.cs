@@ -60,6 +60,7 @@ public class TriggerController : MonoBehaviour
         {
             mainCharacterScript.PlayerAnimator.SetTrigger("Sit");
             mainCharacterScript.MoveCameraToMatchingView();
+            GameManager.Instance.InGamePanel.SetActive(false);
         }
         else if (other.CompareTag("Obstacle"))
         {

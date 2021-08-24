@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using BansheeGz;
 using BansheeGz.BGSpline.Components;
+using UnityEngine.UI;
 
 public class MainCharacterScript : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class MainCharacterScript : MonoBehaviour
     public List<GameObject> CollectedItems;
     public GameObject camera;
     public Transform cameraPosition;
+
+    public Slider slider;
 
     // Update is called once per frame
     void Update()
@@ -49,7 +52,7 @@ public class MainCharacterScript : MonoBehaviour
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved)
             {
-                controller.transform.localPosition = new Vector3(Mathf.Clamp(controller.transform.localPosition.x + touch.deltaPosition.x * Time.deltaTime * (xSpeed / 20), -3.5f, 3.5f), 0, 0);
+                childObject.transform.localPosition = new Vector3(Mathf.Clamp(childObject.transform.localPosition.x + touch.deltaPosition.x * Time.deltaTime * (xSpeed / 20), -3.5f, 3.5f), 0, 0);
             }
             else if (touch.phase == TouchPhase.Began)
             {
@@ -57,8 +60,8 @@ public class MainCharacterScript : MonoBehaviour
                 firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             }
         }
-
 #endif
+        slider.value = bcgTRS.DistanceRatio;
     }
 
     public GameObject[] willBeClose;
