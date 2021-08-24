@@ -21,6 +21,13 @@ public class GameButton : MonoBehaviour
         }
         if (GameManager.Instance.isPlayersTurn)
         {
+            if (GameManager.Instance.currentLevel == 1)
+            {
+                if (GameManager.Instance.Tutorial2.activeSelf)
+                {
+                    GameManager.Instance.Tutorial2.SetActive(false);
+                }
+            }
             switch (buttonType)
             {
                 case ButtonType.DENY:

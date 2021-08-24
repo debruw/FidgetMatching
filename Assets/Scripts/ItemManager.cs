@@ -29,6 +29,7 @@ public class ItemManager : MonoBehaviour
         Deny
     }
 
+    public GameObject StarEffect;
     public State playerState;
     public Transform playerThrowPoint, AIThrowPoint, tableToTurn, tableToParent;
     public AIController aiController;
@@ -120,6 +121,7 @@ public class ItemManager : MonoBehaviour
                 if (AIItem.me == playerCanvasItem.myItem)
                 {
                     tempCanvasItem.Add(playerCanvasItem);
+                    Instantiate(StarEffect, playerCanvasItem.ItemImage.transform.position, Quaternion.identity, playerContent);
                     isMatched = true;
                 }
             }

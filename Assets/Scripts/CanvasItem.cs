@@ -25,6 +25,13 @@ public class CanvasItem : MonoBehaviour
     {
         if (GameManager.Instance.isPlayersTurn)
         {
+            if (GameManager.Instance.currentLevel == 1)
+            {
+                if (GameManager.Instance.Tutorial2.activeSelf)
+                {
+                    GameManager.Instance.Tutorial2.SetActive(false);
+                }
+            }
             ItemManager.Instance.ThrowCurrentObject(myItem.ItemPrefab);
             ItemManager.Instance.playerCanvasItems.Remove(this);
             Destroy(gameObject);

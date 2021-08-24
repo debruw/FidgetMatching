@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TapticPlugin;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     public MainCharacterScript maincharacter;
 
     public int currentLevel = 1;
-    int MaxLevelNumber = 1;
+    int MaxLevelNumber = 5;
     public bool isGameStarted, isGameOver, isTableTurning, isPlayersTurn;
 
     #region UI Elements
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
     public Button TapToStartButton;
     public Text LevelText;
     public GameObject PlayText, ContinueText;
+    public GameObject Tutorial1, Tutorial2;
     #endregion
 
     public void ButtonPressed(GameButton.ButtonType type)
@@ -63,13 +65,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("Win");
         isGameOver = true;
         maincharacter.bcgTRS.Speed = 0;
-        //SoundManager.Instance.StopAllSounds();
-        //SoundManager.Instance.playSound(SoundManager.GameSounds.Win);
+        SoundManager.Instance.StopAllSounds();
+        SoundManager.Instance.playSound(SoundManager.GameSounds.Win);
 
         yield return new WaitForSeconds(1f);
 
-        //if (PlayerPrefs.GetInt("VIBRATION") == 1)
-        //    TapticManager.Impact(ImpactFeedback.Light);
+        if (PlayerPrefs.GetInt("VIBRATION") == 1)
+            TapticManager.Impact(ImpactFeedback.Light);
 
         currentLevel++;
         PlayerPrefs.SetInt("LevelId", currentLevel);
@@ -81,12 +83,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Lose");
         isGameOver = true;
         maincharacter.bcgTRS.Speed = 0;
-        //SoundManager.Instance.playSound(SoundManager.GameSounds.Lose);
+        SoundManager.Instance.playSound(SoundManager.GameSounds.Lose);
 
         yield return new WaitForSeconds(1f);
 
-        //if (PlayerPrefs.GetInt("VIBRATION") == 1)
-        //    TapticManager.Impact(ImpactFeedback.Medium);
+        if (PlayerPrefs.GetInt("VIBRATION") == 1)
+            TapticManager.Impact(ImpactFeedback.Medium);
 
         LosePanel.SetActive(true);
     }
@@ -122,7 +124,12 @@ public class GameManager : MonoBehaviour
         isGameStarted = true;
         TapToStartButton.gameObject.SetActive(false);
 
-        maincharacter.bcgTRS.Speed = 10;
+        maincharacter.bcgTRS.Speed = maincharacter.zSpeed;
         maincharacter.PlayerAnimator.SetTrigger("Run");
+
+        if (currentLevel == 1)
+        {
+            Tutorial1.SetActive(true);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TapticPlugin;
 
 public class TriggerController : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class TriggerController : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
+            SoundManager.Instance.playSound(SoundManager.GameSounds.Collect);
+            if (PlayerPrefs.GetInt("VIBRATION") == 1)
+                TapticManager.Impact(ImpactFeedback.Light);
+
             Instantiate(poffEffect, other.transform.position, Quaternion.identity);
             other.transform.parent.transform.parent = Points[Random.Range(0, Points.Count)].transform;
             other.transform.parent.transform.localPosition = Vector3.zero;
@@ -39,7 +44,9 @@ public class TriggerController : MonoBehaviour
                         Instantiate(popEffect, other.transform.parent.transform.position, Quaternion.identity);
                         Destroy(other.gameObject);
                     });
-
+                    SoundManager.Instance.playSound(SoundManager.GameSounds.Matched);
+                    if (PlayerPrefs.GetInt("VIBRATION") == 1)
+                        TapticManager.Impact(ImpactFeedback.Light);
                     break;
                 }
             }
@@ -56,6 +63,9 @@ public class TriggerController : MonoBehaviour
         }
         else if (other.CompareTag("Obstacle"))
         {
+            if (PlayerPrefs.GetInt("VIBRATION") == 1)
+                TapticManager.Impact(ImpactFeedback.Medium);
+
             GameManager.Instance.isGameOver = true;
             mainCharacterScript.PlayerAnimator.SetTrigger("Fall");
             foreach (GameObject item in mainCharacterScript.CollectedItems)

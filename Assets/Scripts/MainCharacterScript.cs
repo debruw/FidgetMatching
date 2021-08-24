@@ -12,7 +12,7 @@ public class MainCharacterScript : MonoBehaviour
     private Touch touch;
 
     public GameObject childObject;
-    public float xSpeed;
+    public float xSpeed, zSpeed = 15;
     public GameObject ChildObject;
     public Animator PlayerAnimator;
     public BGCcTrs bcgTRS;
@@ -31,6 +31,10 @@ public class MainCharacterScript : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetMouseButton(0))
         {
+            if (GameManager.Instance.currentLevel == 1)
+            {
+                GameManager.Instance.Tutorial1.SetActive(false);
+            }
             translation = new Vector3(Input.GetAxis("Mouse X"), 0, 0) * Time.deltaTime * xSpeed;
             childObject.transform.Translate(translation, Space.Self);
             childObject.transform.localPosition = new Vector3(Mathf.Clamp(childObject.transform.localPosition.x, -3.5f, 3.5f), 0, 0);
@@ -38,6 +42,10 @@ public class MainCharacterScript : MonoBehaviour
 #elif UNITY_IOS || UNITY_ANDROID
         if (Input.touchCount > 0)
         {
+            if (GameManager.Instance.currentLevel == 1)
+            {
+                GameManager.Instance.Tutorial1.SetActive(false);
+            }
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved)
             {
@@ -73,6 +81,10 @@ public class MainCharacterScript : MonoBehaviour
                 item.SetActive(true);
             }
             StartCoroutine(WaitAndDeactivate());
+            if (GameManager.Instance.currentLevel == 1)
+            {
+                GameManager.Instance.Tutorial2.SetActive(true);
+            }
         });
         GameManager.Instance.itemManager.SetCanvasObjects(CollectedItems);
     }
