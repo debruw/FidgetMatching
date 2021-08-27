@@ -2076,6 +2076,7 @@ MonoBehaviour:
   CollectedItems: []
   camera: {fileID: 7075111855485356227}
   cameraPosition: {fileID: 0}
+  slider: {fileID: 0}
   willBeClose:
   - {fileID: 0}
   - {fileID: 0}

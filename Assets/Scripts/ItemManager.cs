@@ -68,7 +68,7 @@ public class ItemManager : MonoBehaviour
         if (playerCanvasItems.Count == 1 && playerItemsOnTable.Count == 0 && playerState == State.WantMore)
         {
             aiController.currentAIState = State.None;
-            GameObject item = Instantiate(playerCanvasItems[0].myItem.ItemPrefab, AIThrowPoint.position, itemList[0].ItemPrefab.transform.rotation, tableToTurn);
+            GameObject item = Instantiate(playerCanvasItems[0].myItem.ItemPrefab, AIThrowPoint.position, playerCanvasItems[0].myItem.ItemPrefab.transform.rotation, tableToTurn);
             item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
             AIItemsOnTheTable.Add(item.GetComponent<Item>());
         }
@@ -78,7 +78,7 @@ public class ItemManager : MonoBehaviour
             {
                 aiController.currentAIState = State.None;
                 int random = Random.Range(0, playerCanvasItems.Count);
-                GameObject item = Instantiate(playerCanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+                GameObject item = Instantiate(playerCanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, playerCanvasItems[random].myItem.ItemPrefab.transform.rotation, tableToTurn);
                 item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
                 AIItemsOnTheTable.Add(item.GetComponent<Item>());
             }
@@ -88,7 +88,8 @@ public class ItemManager : MonoBehaviour
                 {
                     aiController.currentAIState = State.None;
                     int random = Random.Range(0, AICanvasItems.Count);
-                    GameObject item = Instantiate(AICanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, itemList[random].ItemPrefab.transform.rotation, tableToTurn);
+                    Debug.Log(random + " // " + AICanvasItems.Count + " == " + AICanvasItems[random]);
+                    GameObject item = Instantiate(AICanvasItems[random].myItem.ItemPrefab, AIThrowPoint.position, AICanvasItems[random].myItem.ItemPrefab.transform.rotation, tableToTurn);
                     item.GetComponent<ObiSoftbody>().AddForce(new Vector3(Random.Range(-3f, 3f), 0, -7), ForceMode.VelocityChange);
                     AIItemsOnTheTable.Add(item.GetComponent<Item>());
                     GameObject go = AICanvasItems[random].gameObject;
